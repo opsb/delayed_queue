@@ -1,5 +1,5 @@
 Autotest.add_hook :initialize do |autotest|
-  autotest.add_mapping(/^test.*\/.*_test\.rb$/) do |filename, _|
+  autotest.add_mapping(/^spec.*\/.*_spec\.rb$/) do |filename, _|
     puts filename
     filename
   end
