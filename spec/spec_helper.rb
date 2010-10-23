@@ -33,6 +33,8 @@ ActiveRecord::Schema.define do
     table.datetime :failed_at
     table.string   :locked_by
     table.timestamps
+    
+    table.integer :queue_id
   end
   
   create_table :queues, :force => true do |table|
