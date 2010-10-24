@@ -40,6 +40,7 @@ ActiveRecord::Schema.define do
   end
   
   create_table :queues, :force => true do |table|
+    table.boolean :locked, :default => false
     table.timestamps
   end
 

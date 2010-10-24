@@ -6,6 +6,12 @@ module Delayed
         def <<(job)
           jobs << (Job.enqueue job)
         end
+        def lock
+          self.locked = true
+        end
+        def unlock
+          self.locked = false
+        end
       end
     end
   end
