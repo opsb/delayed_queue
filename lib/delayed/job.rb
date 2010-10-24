@@ -9,8 +9,10 @@ module Delayed
           joins(:queue) & Queue.unlocked
         }
         scope :orig_ready_to_run, scopes[:ready_to_run]
-        scope :ready_to_run, lambda {|worker_name, max_run_time|
-          orig_ready_to_run(worker_name, max_run_time).in_unlocked_queue
+        scope :ready_to_run, lambda {|*args|
+          orig_ready_to_run(*args).
+          joins(:queue).
+          where(["delayed_jobs.attempts > 0 or queues.locked = ?", false])
         }
       end
     end
