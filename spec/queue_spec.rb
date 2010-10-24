@@ -4,12 +4,16 @@ describe Delayed::Backend::ActiveRecord::Queue do
   it { should have_many :jobs }
   context "a queue" do
     before do
-      @queue = Delayed::Backend::ActiveRecord::Queue.new
+      @queue = Delayed::Backend::ActiveRecord::Queue.create
     end
 
     it "can be locked" do
       @queue.lock
       @queue.locked.should == true
+    end
+    
+    it "included in unlocked queues" do
+      Delayed::Backend::ActiveRecord::Queue.unlocked.should include(@queue)
     end
   end
 
