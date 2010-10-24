@@ -2,6 +2,7 @@ require 'spec/spec_helper'
 
 describe Delayed::Backend::ActiveRecord::Queue do
   it { should have_many :jobs }
+  
   context "a queue" do
     before do
       @queue = Delayed::Backend::ActiveRecord::Queue.create
@@ -18,6 +19,7 @@ describe Delayed::Backend::ActiveRecord::Queue do
       @queue = Delayed::Backend::ActiveRecord::Queue.new
       @queue.lock
     end
+
     it "can be unlocked" do
       @queue.unlock
       @queue.locked.should == false
