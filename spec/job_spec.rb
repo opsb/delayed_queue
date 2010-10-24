@@ -15,6 +15,10 @@ describe Delayed::Backend::ActiveRecord::Job do
     it "is available in global queue" do
       Delayed::Job.find_available(nil, 1).first.payload_object.should == @job
     end
+    after do
+      puts "queue size: #{Delayed::Backend::ActiveRecord::Queue.count}"
+    end
+
   end 
 
   context "that has been added to a locked queue" do
@@ -33,6 +37,9 @@ describe Delayed::Backend::ActiveRecord::Job do
     end
     it "is not included in global queue" do
       Delayed::Job.find_available(nil, 1).should be_empty
+    end
+        after do
+      puts "queue size: #{Delayed::Backend::ActiveRecord::Queue.count}"
     end
   end
 end
