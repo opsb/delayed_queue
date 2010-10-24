@@ -8,10 +8,7 @@ require 'logger'
 require 'active_record'
 require 'action_mailer'
 
-require 'delayed_job'
-require 'delayed_queue'
 
-Delayed::Worker.logger = Logger.new('/tmp/dj.log')
 ENV['RAILS_ENV'] = 'test'
 require 'rails'
 require 'shoulda'
@@ -21,7 +18,6 @@ require 'spec/sample_jobs'
 config = YAML.load(File.read('spec/database.yml'))
 ActiveRecord::Base.configurations = {'test' => config['sqlite']}
 ActiveRecord::Base.establish_connection
-ActiveRecord::Base.logger = Delayed::Worker.logger
 ActiveRecord::Migration.verbose = false
 
 ActiveRecord::Schema.define do
@@ -51,6 +47,11 @@ ActiveRecord::Schema.define do
   end
 end
 
+
+require 'delayed_job'
+Delayed::Worker.logger = Logger.new('/tmp/dj.log')
+ActiveRecord::Base.logger = Delayed::Worker.logger
+Delayed::Worker.backend = :active_record
 # Purely useful for test cases...
 class Story < ActiveRecord::Base
   def tell; text; end       
@@ -58,8 +59,6 @@ class Story < ActiveRecord::Base
   
   handle_asynchronously :whatever
 end
-
-Delayed::Worker.backend = :active_record
-
+require 'delayed_queue'
 # Add this directory so the ActiveSupport autoloading works
 ActiveSupport::Dependencies.autoload_paths << File.dirname(__FILE__)
