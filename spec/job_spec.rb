@@ -15,6 +15,10 @@ describe Delayed::Backend::ActiveRecord::Job do
     it "is available in global queue" do
       Delayed::Job.find_available(nil, 1).first.payload_object.should == @job
     end
+
+    context "and has failed" do
+      it "should still be avilable in global queue"
+    end
   end 
 
   context "that has been added to a locked queue" do
@@ -34,4 +38,5 @@ describe Delayed::Backend::ActiveRecord::Job do
       Delayed::Job.find_available(nil, 1).should be_empty
     end
   end
+
 end
