@@ -11,10 +11,6 @@ describe Delayed::Backend::ActiveRecord::Queue do
       @queue.lock
       @queue.locked.should == true
     end
-    
-    it "included in unlocked queues" do
-      Delayed::Backend::ActiveRecord::Queue.unlocked.should include(@queue)
-    end
   end
 
   context "a locked queue" do

@@ -26,10 +26,6 @@ describe Delayed::Backend::ActiveRecord::Job do
       queue << @job 
     end
 
-    it "is not included in unlocked queues" do
-      Delayed::Job.in_unlocked_queue.should be_empty
-    end
-
     it "is not ready to run" do
       Delayed::Job.ready_to_run(nil, 1).should be_empty
     end

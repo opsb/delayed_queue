@@ -3,9 +3,6 @@ module Delayed
     module ActiveRecord
       class Queue < ::ActiveRecord::Base
         has_many :jobs
-        scope :unlocked, lambda {
-          where(:locked => false)
-        }
         def <<(job)
           jobs << (Job.enqueue job)
         end
