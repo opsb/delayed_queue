@@ -15,6 +15,8 @@ Delayed::Worker.logger = Logger.new('/tmp/dj.log')
 ENV['RAILS_ENV'] = 'test'
 require 'rails'
 require 'shoulda'
+require 'looksee/shortcuts'
+require 'spec/sample_jobs'
 
 config = YAML.load(File.read('spec/database.yml'))
 ActiveRecord::Base.configurations = {'test' => config['sqlite']}
