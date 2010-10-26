@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "delayed_queue"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Adds multiple queues to delayed_job}
+    gem.description = %Q{Adds multiple queues to delayed_job}
     gem.email = "oliver@opsb.co.uk"
     gem.homepage = "http://github.com/opsb/delayed_queue"
     gem.authors = ["opsb"]
