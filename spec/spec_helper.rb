@@ -30,7 +30,7 @@ ActiveRecord::Schema.define do
     table.integer :queue_id
   end
   
-  create_table :queues, :force => true do |table|
+  create_table :delayed_queues, :force => true do |table|
     table.boolean :locked, :default => false
     table.timestamps
   end

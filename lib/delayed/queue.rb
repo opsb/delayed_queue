@@ -2,6 +2,7 @@ module Delayed
   module Backend
     module ActiveRecord
       class Queue < ::ActiveRecord::Base
+        set_table_name "delayed_queues"
         has_many :jobs
 
         def <<(job)
